@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String  @id @default(uuid())
+  clerkUserId        String  @unique @map("clerk_user_id")
+  email              String  @unique
+  oneMoneyCustomerId String? @unique @map("onemoney_customer_id")
+  oneMoneyKybStatus  String? @map("onemoney_kyb_status")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
